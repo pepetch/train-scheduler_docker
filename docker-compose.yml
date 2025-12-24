@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: train_db
+    volumes:
+      - db_data:/var/lib/mysql
+    # ❌ ไม่ต้องเปิด port 3306
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: train_db
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "8081:80"   # ✅ เปลี่ยนจาก 8080 → 8081
+    depends_on:
+      - db
+
+volumes:
+  db_data:
