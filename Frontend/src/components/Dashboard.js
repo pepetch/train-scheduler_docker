@@ -44,7 +44,7 @@ export default function Dashboard({ user, onLogout }) {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={{ fontSize: 18 }}>Welcome, <b>{user.username}</b></div>
-        
+        <div style={{ fontSize: 18 }}>Welcome, <b>suwanna</b></div>
         <button 
           onClick={onLogout} 
           style={{
