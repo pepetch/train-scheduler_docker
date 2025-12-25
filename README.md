@@ -4,8 +4,8 @@
 This project is a **Full-Stack Web Application** developed using
 Node.js, React, MySQL, Docker, and Jenkins CI/CD.
 
-The system provides train schedule management with authentication,
-RESTful APIs, frontend UI, and database integration.
+The system provides train schedule management with RESTful APIs,
+frontend UI, and database integration.
 
 ---
 
@@ -31,4 +31,6 @@ train_scheduler_docker/
 │   └── package.json
 ├── docker-compose.yml
 ├── Jenkinsfile
+├── init.sql
+├── .env.example
 └── README.md
