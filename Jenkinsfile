@@ -34,16 +34,17 @@ pipeline {
             steps {
                 echo '🩺 Waiting for backend to be healthy...'
                 sh '''
-                for i in {1..10}; do
+                for i in $(seq 1 10); do
+                  echo "Attempt $i: checking backend health..."
                   if curl -f http://localhost:5000/health; then
                     echo "Backend is healthy"
                     exit 0
                   fi
-                  echo "Backend not ready yet... retrying"
+                  echo "Backend not ready yet... retrying in 3 seconds"
                   sleep 3
                 done
 
-                echo "Backend health check failed"
+                echo "Backend health check failed after retries"
                 exit 1
                 '''
             }
