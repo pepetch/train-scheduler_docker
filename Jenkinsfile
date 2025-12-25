@@ -32,8 +32,20 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                echo '🩺 Checking backend health...'
-                sh 'curl -f http://localhost:5000/health'
+                echo '🩺 Waiting for backend to be healthy...'
+                sh '''
+                for i in {1..10}; do
+                  if curl -f http://localhost:5000/health; then
+                    echo "Backend is healthy"
+                    exit 0
+                  fi
+                  echo "Backend not ready yet... retrying"
+                  sleep 3
+                done
+
+                echo "Backend health check failed"
+                exit 1
+                '''
             }
         }
     }
